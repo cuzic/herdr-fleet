@@ -16,7 +16,9 @@ No keys to merge in v1. To remove: delete the copied files.
 
 ## Prototype status
 
-Working prototype. `preview.png` is still to be captured from a live window. Statuses cover pane addresses only (sub-agents without a pane are invisible); see RECIPE "Watch out".
+Working prototype, verified live on Windows (see `demo.mp4`, 71s). Statuses cover pane addresses only (sub-agents without a pane are invisible); see RECIPE "Watch out".
+
+![Fleet](preview.png)
 
 ## License
 
