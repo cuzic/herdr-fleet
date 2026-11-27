@@ -16,8 +16,10 @@ export default class Fleet extends View {
   }
 
   // The agents mod's glyph language: spinner, ! badge, dot, ring.
-  glyph(t, status) {
+  // Inverted (blocked) cells get a white ! so it stays readable.
+  glyph(t, status, inverted) {
     if (status === "working") return svg("mods/fleet/spinner.svg").size(12).flex_none().text_color(t.working).spin(900);
+    if (status === "blocked" && inverted) return div().size(14).flex_none().rounded(4).bg("#ffffff2e").text_size(10.5).font_bold().text_color("#ffffff").flex().items_center().justify_center().child("!");
     if (status === "blocked") return div().size(14).flex_none().rounded(4).bg(t.blocked + "26").text_size(10.5).font_bold().text_color(t.blocked).flex().items_center().justify_center().child("!");
     if (status === "done") return div().size(7).mx(3).flex_none().rounded(4).bg(t.done);
     if (status === "idle") return div().size(7).mx(3).flex_none().rounded(4).border(1.5).border_color(t.idle ?? t.dim);
@@ -53,7 +55,7 @@ export default class Fleet extends View {
       .child(div().text_size(11).text_color(dim).child(String(i + 1)))
       .child(div().max_w(140).truncate().text_size(12).when(s.active, (el) => el.font_semibold()).child(s.name))
       .when(Boolean(counts), (el) => el.child(div().text_size(11).text_color(dim).child(counts)))
-      .child(this.glyph(t, mine.length ? (s.status ?? "idle") : null));
+      .child(this.glyph(t, mine.length ? (s.status ?? "idle") : null, inverted));
   }
 
   render() {
